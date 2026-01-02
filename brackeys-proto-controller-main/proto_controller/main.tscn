@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://dcruty0dnko5d"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://brackeys-proto-controller-main/proto_controller/proto_controller.tscn" id="1_88acw"]
+[ext_resource type="Script" uid="uid://co0log4an4phi" path="res://brackeys-proto-controller-main/proto_controller/main.gd" id="1_iafxi"]
+[ext_resource type="Script" uid="uid://qmgxlrxw5pid" path="res://brackeys-proto-controller-main/proto_controller/proto_controller.gd" id="2_iafxi"]
+[ext_resource type="PackedScene" uid="uid://d0oclkwpyxn5t" path="res://brackeys-proto-controller-main/proto_controller/creature.tscn" id="3_nw7x3"]
+[ext_resource type="Script" uid="uid://d2tismjqus1mg" path="res://brackeys-proto-controller-main/proto_controller/creature.gd" id="4_k7hwm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu1mo"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_hphl3"]
+sky_material = SubResource("ProceduralSkyMaterial_pu1mo")
+
+[sub_resource type="Environment" id="Environment_ufx48"]
+background_mode = 2
+sky = SubResource("Sky_hphl3")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iafxi"]
+radius = 12.76632
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_iafxi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ufx48")
+
+[node name="ProtoController" parent="." instance=ExtResource("1_88acw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6600027, 0.576663, -3.433044)
+script = ExtResource("2_iafxi")
+
+[node name="CREATURE2" parent="." instance=ExtResource("3_nw7x3")]
+transform = Transform3D(0.31500006, 0, 0, 0, 0.31500003, 0, 0, 0, 0.31500006, -0.562, 1.722, -1.072)
+script = ExtResource("4_k7hwm")
+
+[node name="Area3D" type="Area3D" parent="CREATURE2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CREATURE2/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6925874, -1.937453, -0.35733223)
+shape = SubResource("SphereShape3D_iafxi")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23567462, 4.7683716e-07, -0.5528865)
+use_collision = true
+size = Vector3(19.109375, 1, 26.97754)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[connection signal="body_entered" from="CREATURE2/Area3D" to="ProtoController" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="CREATURE2/Area3D" to="ProtoController" method="_on_area_3d_body_exited"]
