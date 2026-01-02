@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcruty0dnko5d"]
+[gd_scene load_steps=11 format=3 uid="uid://dcruty0dnko5d"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://brackeys-proto-controller-main/proto_controller/proto_controller.tscn" id="1_88acw"]
 [ext_resource type="Script" uid="uid://co0log4an4phi" path="res://brackeys-proto-controller-main/proto_controller/main.gd" id="1_iafxi"]
@@ -20,7 +20,10 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iafxi"]
-radius = 12.76632
+radius = 21.826715
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iafxi"]
+albedo_color = Color(0, 0.60827196, 0.41271555, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_iafxi")
@@ -37,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6600027, 0.576663, -3.4330
 script = ExtResource("2_iafxi")
 
 [node name="CREATURE2" parent="." instance=ExtResource("3_nw7x3")]
-transform = Transform3D(0.31500006, 0, 0, 0, 0.31500003, 0, 0, 0, 0.31500006, -0.562, 1.722, -1.072)
+transform = Transform3D(0.31500006, 0, 0, 0, 0.31500003, 0, 0, 0, 0.31500006, -0.562, 1.722, 6.5335646)
 script = ExtResource("4_k7hwm")
 
 [node name="Area3D" type="Area3D" parent="CREATURE2"]
@@ -49,7 +52,8 @@ shape = SubResource("SphereShape3D_iafxi")
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23567462, 4.7683716e-07, -0.5528865)
 use_collision = true
-size = Vector3(19.109375, 1, 26.97754)
+size = Vector3(78.46289, 1, 110.23828)
+material = SubResource("StandardMaterial3D_iafxi")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 
